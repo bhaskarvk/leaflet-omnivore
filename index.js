@@ -26,8 +26,9 @@ module.exports.wkt = wktLoad;
 module.exports.wkt.parse = wktParse;
 
 function addData(l, d) {
-    if ('addData' in l) l.addData(d);
     if ('setGeoJSON' in l) l.setGeoJSON(d);
+    if ('setGeoJSON' in l.options) l.options.setGeoJSON(d);
+    if ('addData' in l) l.addData(d);
 }
 
 /**
@@ -186,8 +187,9 @@ function topojsonParse(data, options, layer) {
     layer = layer || L.geoJson();
     for (var i in o.objects) {
         var ft = topojson.feature(o, o.objects[i]);
-        if (ft.features) addData(layer, ft.features);
-        else addData(layer, ft);
+        addData(layer, ft);
+        //if (ft.features) addData(layer, ft.features);
+        //else addData(layer, ft);
     }
     return layer;
 }
