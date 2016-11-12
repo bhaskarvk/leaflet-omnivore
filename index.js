@@ -27,7 +27,6 @@ module.exports.wkt.parse = wktParse;
 
 function addData(l, d) {
     if ('setGeoJSON' in l) l.setGeoJSON(d);
-    if ('setGeoJSON' in l.options) l.options.setGeoJSON(d);
     if ('addData' in l) l.addData(d);
 }
 
